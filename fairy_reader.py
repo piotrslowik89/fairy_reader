@@ -4,41 +4,63 @@ import keyboard
 import time
 import threading
 
+# 🌟 NAPIS POWITALNY 🌟
+def display_welcome_message():
+    print("""
+    ==============================================
+    🎧  Fairy Reader (pol. BajkoCzytacz) AUTOMATION SCRIPT  🎧
+    ==============================================
+    📌 Autor: Piotr Słowik
+    📌 Licencja: MIT
+    📌 Wersja: 1.0
+    📌 Opis: Automatyczne wykrywanie ciszy i reakcja klawiszowa
+    ==============================================
+    """)
+
+display_welcome_message()
+
 # Parametry nasłuchiwania
 SAMPLE_RATE = 44100  # Częstotliwość próbkowania (Hz)
-DURATION = 0.35  # Czas ciszy w sekundach wymagany do aktywacji sekwencji
-THRESHOLD = 0.01  # Próg dźwięku uznawanego za ciszę
+DURATION = 2  # Czas ciszy w sekundach wymagany do aktywacji sekwencji
+THRESHOLD = 0.001  # Obniżony próg wykrywania ciszy
 
 # Flagi i zmienne kontrolujące
-listening = False
-stop_program = False  # Flaga do zakończenia programu
-last_sound_time = None  # Zmieniam na None, aby resetować poprawnie
-sequence_executed = False  # Zapobiega wielokrotnemu wywoływaniu
+listening = False    
+stop_program = False
+last_sound_time = None
+sequence_executed = False
 
-# 🔍 Automatyczne wyszukiwanie "Miks stereo"
-def find_stereo_mix():
+# 🔍 Automatyczne wyszukiwanie najlepszego urządzenia
+def find_best_device():
     devices = sd.query_devices()
     for i, device in enumerate(devices):
-        if "Miks stereo" in device['name']:
+        if device['max_input_channels'] > 0 and "Stereo Mix" in device['name']:
             print(f"✅ Używam urządzenia: {device['name']} (ID: {i})")
             return i
-    print("❌ Nie znaleziono 'Miks stereo'. Sprawdź ustawienia dźwięku!")
+    print("❌ Nie znaleziono odpowiedniego urządzenia dźwięku systemowego! Wybieram pierwsze dostępne.")
+    for i, device in enumerate(devices):
+        if device['max_input_channels'] > 0:
+            print(f"✅ Używam urządzenia: {device['name']} (ID: {i})")
+            return i
     return None
 
-stereo_mix_id = find_stereo_mix()
-if stereo_mix_id is not None:
-    sd.default.device = (stereo_mix_id, None)  # Ustaw "Miks stereo" jako źródło wejściowe
-else:
-    exit("🔴 Skrypt zakończony: Brak 'Miks stereo'")
+output_device_id = find_best_device()
+if output_device_id is None:
+    exit("🔴 Skrypt zakończony: Brak odpowiedniego urządzenia audio!")
+
+device_info = sd.query_devices(output_device_id)
+num_channels = max(1, min(device_info['max_input_channels'], 2))
+
+sd.default.device = (output_device_id, None)
 
 def detect_silence(indata, frames, callback_time, status):
     """Funkcja analizująca dźwięk w czasie rzeczywistym."""
     global last_sound_time, sequence_executed
 
-    volume_norm = np.linalg.norm(indata)  # Obliczenie poziomu głośności
+    volume_norm = np.linalg.norm(indata) / len(indata)  # Normalizacja poziomu głośności
     if volume_norm > THRESHOLD:
-        last_sound_time = time.time()  # Aktualizacja czasu ostatniego dźwięku
-        sequence_executed = False  # Reset flagi po wykryciu dźwięku
+        last_sound_time = time.time()
+        sequence_executed = False
 
 def execute_sequence():
     """Wykonuje sekwencję klawiszy: space -> alt+tab -> space."""
@@ -52,16 +74,16 @@ def execute_sequence():
 def listen():
     """Obsługuje nasłuchiwanie dźwięków systemowych."""
     global listening, last_sound_time, sequence_executed
-    last_sound_time = time.time()  # Resetowanie czasu ciszy na start
-    sequence_executed = False  # Reset flagi
+    last_sound_time = time.time()
+    sequence_executed = False
     print("🎧 Nasłuchiwanie rozpoczęte... (F9, aby zatrzymać)")
 
-    with sd.InputStream(callback=detect_silence, samplerate=SAMPLE_RATE, channels=1, dtype='float32'):
+    with sd.InputStream(callback=detect_silence, samplerate=SAMPLE_RATE, channels=num_channels, device=output_device_id, dtype='float32'):
         while listening and not stop_program:
             time.sleep(0.1)
             if time.time() - last_sound_time > DURATION and not sequence_executed:
                 execute_sequence()
-                sequence_executed = True  # Zapobiega wielokrotnemu wywoływaniu
+                sequence_executed = True
 
 def start_listening():
     """Rozpoczyna nasłuchiwanie w osobnym wątku, resetując wartości."""
@@ -79,8 +101,8 @@ def stop_listening():
         print("🔵 Nasłuchiwanie już wyłączone.")
         return
     listening = False
-    last_sound_time = None  # Resetowanie czasu ciszy
-    sequence_executed = False  # Reset flagi
+    last_sound_time = None
+    sequence_executed = False
     print("🛑 Nasłuchiwanie zatrzymane.")
 
 def exit_program():
@@ -100,4 +122,4 @@ print("🔵 Naciśnij F9, aby rozpocząć/zatrzymać nasłuchiwanie.")
 print("🔴 Naciśnij ESC, aby zamknąć program.")
 
 while not stop_program:
-    time.sleep(0.1)  # Pętla utrzymująca skrypt aktywny
+    time.sleep(0.1)
