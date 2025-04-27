@@ -1,4 +1,3 @@
-
 # Poprawianie skrótów w ebookach wielojęzycznych (PL/EN/DE/RU)
 
 Ten plik zawiera wyrażenia regularne (regex), które umożliwiają poprawę skrótów w książkach elektronicznych w językach: angielskim, niemieckim i rosyjskim.
@@ -13,28 +12,28 @@ Pomaga to usunąć niepotrzebne kropki w skrótach, aby skrypty do wykrywania ko
 
 **Znajdź:**
 
-```regex
+```
 (Mr|Mrs|Ms|Dr|Prof|Rev|Sr|Jr)\.
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 ### Stopnie naukowe i zawodowe
 
 **Znajdź:**
 
-```regex
+```
 (M\.D\.|Ph\.D\.|B\.A\.|M\.A\.|D\.D\.S\.|J\.D\.|B\.Sc\.|M\.Sc\.)
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 *(Uwaga: Po zamianie należy ręcznie usunąć kropki np. M.D. → MD)*
@@ -43,42 +42,42 @@ Pomaga to usunąć niepotrzebne kropki w skrótach, aby skrypty do wykrywania ko
 
 **Znajdź:**
 
-```regex
+```
 (St|Ave|Blvd|Rd)\.
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 ### Skróty czasu
 
 **Znajdź:**
 
-```regex
+```
 (a\.m\.|p\.m\.)
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 ### Skróty zwrotów
 
 **Znajdź:**
 
-```regex
+```
 (e\.g\.|i\.e\.|etc\.)
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 ---
@@ -89,28 +88,28 @@ Pomaga to usunąć niepotrzebne kropki w skrótach, aby skrypty do wykrywania ko
 
 **Znajdź:**
 
-```regex
+```
 (Hr|Fr|Dr|Prof)\.
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 ### Powszechne skróty
 
 **Znajdź:**
 
-```regex
+```
 (Bsp|z\.B|u\.a|vgl)\.
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 - z.B. = na przykład
@@ -129,14 +128,14 @@ W języku niemieckim zwykle zapisuje się godziny w formacie `10:30 Uhr`, więc 
 
 **Znajdź:**
 
-```regex
+```
 (г|ул|д|просп|пл|пер)\.
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 - г. = miasto (город)
@@ -150,14 +149,14 @@ W języku niemieckim zwykle zapisuje się godziny w formacie `10:30 Uhr`, więc 
 
 **Znajdź:**
 
-```regex
+```
 (т\.д\.|т\.п\.|и\.т\.д\.|и\.т\.п\.)
 ```
 
 **Zamień na:**
 
-```regex
-
+```
+\1
 ```
 
 - т.д. = i tak dalej
@@ -171,3 +170,5 @@ W języku niemieckim zwykle zapisuje się godziny w formacie `10:30 Uhr`, więc 
 - Włącz opcję **Uwzględniaj wielkość liter** (szczególnie dla angielskich tytułów).
 - W przypadku tekstu rosyjskiego upewnij się, że edytor używa kodowania UTF-8.
 - Ręczne poprawki mogą być potrzebne dla stopni naukowych (np. M.D. → MD).
+
+---
