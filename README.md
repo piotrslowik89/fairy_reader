@@ -73,6 +73,12 @@ Fairy Reader **automatycznie przełącza okna** między książką w języku obc
   - Usuń niemieckie cudzysłowy `» «`.
   - Zamień `Mr.`/`Mrs.` na `Mr`/`Mrs` (bez kropki).
 
+
+### 📄 Dodatkowe narzędzia i instrukcje
+
+- [📚 Instrukcja poprawy skrótów w książkach (PL/EN/DE/RU)](./fix_abbreviations_multilang.md)  
+  *(Opisuje jak usunąć kropki ze skrótów, aby usprawnić działanie wykrywania ciszy podczas czytania książek.)*
+
 ### 🔹 2. **Instalacja oprogramowania**
 
 - [Pobierz Calibre](https://calibre-ebook.com/)
