@@ -1,4 +1,8 @@
+
 # 📍 Fairy Reader
+
+[![Made with Python](https://img.shields.io/badge/Made%20with-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Ubuntu%20%7C%20macOS-lightgrey?style=for-the-badge)]()
 
 > **Nauka języka poprzez naturalne przyswajanie – bez gramatyki, bez wkuwania.**
 
@@ -18,15 +22,18 @@ Jednak dzięki **interesującym książkom i zaangażowaniu** nauka może być z
 ## ✅ **Zalety metody Fairy Reader**
 
 1. **Aktywna nauka poprzez kontekst**
+
    - Czytanie pobudza wyobraźnię, tworząc **"teatr wyobraźni"**.
    - Używane słownictwo pochodzi z rzeczywistego języka.
    - Połączenie tekstu z lektorem pomaga w nauce poprawnej wymowy.
 
 2. **Bez nudnego wkuwania**
+
    - Naturalna nauka w kontekście.
    - Zapamiętywanie nowych słów w realnych sytuacjach.
 
 3. **Elastyczność**
+
    - Dowolny wybór książek.
    - Możliwość stosowania w wielu językach.
 
