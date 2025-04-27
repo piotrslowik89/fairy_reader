@@ -1,5 +1,4 @@
-# **Fairy Reader** 📖🎧
-## (pol. "Baśniowy Czytelnik" , "Bajkoczytacz") ##
+# 📍 Fairy Reader
 
 > **Nauka języka poprzez naturalne przyswajanie – bez gramatyki, bez wkuwania.**
 
@@ -19,127 +18,123 @@ Jednak dzięki **interesującym książkom i zaangażowaniu** nauka może być z
 ## ✅ **Zalety metody Fairy Reader**
 
 1. **Aktywna nauka poprzez kontekst**
-
    - Czytanie pobudza wyobraźnię, tworząc **"teatr wyobraźni"**.
-   - Używane słownictwo pochodzi z rzeczywistego języka, co pozwala lepiej go zrozumieć.
+   - Używane słownictwo pochodzi z rzeczywistego języka.
    - Połączenie tekstu z lektorem pomaga w nauce poprawnej wymowy.
 
 2. **Bez nudnego wkuwania**
+   - Naturalna nauka w kontekście.
+   - Zapamiętywanie nowych słów w realnych sytuacjach.
 
-   - Brak sztucznego powtarzania i list słówek – zamiast tego naturalna nauka w kontekście.
-   - Nowe słowa zapamiętywane są w **realnych sytuacjach**, co zwiększa ich trwałość w pamięci.
-
-3. **Łatwość dostosowania do własnych potrzeb**
-
-   - Możliwość wyboru dowolnej książki.
-   - Elastyczna metoda, którą można stosować w różnych językach.
+3. **Elastyczność**
+   - Dowolny wybór książek.
+   - Możliwość stosowania w wielu językach.
 
 ---
 
 ## ⚠️ **Wady metody**
 
-- **Początkowa trudność** – na początku może wydawać się to trudne lub nużące.
-- **Skrypt nie jest idealny** – może niekiedy zatrzymać się w niewłaściwym miejscu.
-- **Wymaga konfiguracji** – konieczne jest przygotowanie książek i uruchomienie skryptu.
+- **Początkowa trudność**.
+- **Skrypt może się czasem zatrzymać**.
+- **Wymagana konfiguracja**.
 
-Jednak po krótkim okresie adaptacji metoda staje się **intuicyjna i efektywna**!
+Jednak po adaptacji metoda staje się **bardzo intuicyjna**!
 
 ---
 
-## 🎯 **Jak działa skrypt?**
+## 🌟 **Jak działa skrypt?**
 
 Fairy Reader **automatycznie przełącza okna** między książką w języku obcym a jej tłumaczeniem po wykryciu ciszy w narracji.
 
 ### 🔧 **Mechanizm działania:**
 
-1. **Nasłuchiwanie dźwięku systemowego** (np. audiobooka) przy użyciu **Stereo Mix**.
-2. Po wykryciu **ciszy ≥ 0,35 s** po kropce, skrypt wykonuje sekwencję:
+1. **Nasłuch dźwięku systemowego** (np. audiobooka).
+2. **Wykrycie ciszy ≥ 0,35 s** powoduje sekwencję:
    ```
    SPACE → ALT+TAB → SPACE
    ```
-3. Dzięki temu książki w dwóch językach **automatycznie się przełączają**, umożliwiając porównanie treści.
 
 ---
 
 ## 🛠 **Instrukcja konfiguracji**
 
-### 🔹 **1. Przygotowanie książki**
+### 🔹 1. **Przygotowanie książek**
 
-1. Pobierz książkę w formacie **.EPUB** lub **.MOBI**.
+- Pobierz książki w formacie **.EPUB** lub **.MOBI**.
+- Przetłumacz przez **Calibre** z wtyczką **Ebook Translator**.
+- Edytuj plik HTML:
+  - Usuń niemieckie cudzysłowy `» «`.
+  - Zamień `Mr.`/`Mrs.` na `Mr`/`Mrs` (bez kropki).
 
-2. Przetłumacz ją automatycznie w **Calibre**:
+### 🔹 2. **Instalacja oprogramowania**
 
-   - **Ustawienia → Wtyczki → Pobierz nowe wtyczki** → Wyszukaj **Ebook Translator**.
-   - Po instalacji:     **Prawym na książkę → Wtyczki → Ustawienia → Content → "With no original"**.
+- [Pobierz Calibre](https://calibre-ebook.com/)
+- [Pobierz Python](https://www.python.org/)
+- Zainstaluj biblioteki:
+  ```sh
+  pip install sounddevice numpy keyboard
+  ```
 
-3. **Edycja książki**:
+### 🔹 3. **Konfiguracja audio**
 
-   - Kliknij **prawym na książkę** → **Edycja książki**.
-   - Otwórz pierwszy plik HTML i dokonaj **niezbędnych poprawek**:
-     - Zamień niemieckie cudzysłowy `» «` na spacje.
-     - Zamień skróty w języku angielskim np. `Mr.`, `Mrs.` na `Mr`, `Mrs`. Kropka po Pan i Pani będzie traktowana jako koniec zdania.
-
----
-
-### 🔹 **2. Instalacja wymaganych programów**
-
-1. **Zainstaluj Calibre** 📚   👉 [Pobierz Calibre](https://calibre-ebook.com/)
-
-2. **Skonfiguruj syntezę mowy (TTS)**
-
-   - **Prawym na książkę → "Czytaj na głos"**
-   - **Z menu na dole wybierz → Skonfiguruj Czytanie na głos**
-   - **Wybierz Silnik neuronowy Piper**.     ⚠️ **Uwaga:** Niektóre głosy najwyższej jakości mogą zużywać dużo zasobów systemowych.
-
-3. **Ustawienie pauzy po zdaniu (0,70 s)**
-
-   - Przejdź do ustawień **TTS** w Calibre.
+- **Windows**: włącz **Stereo Mix** lub **VB-Cable**.
+- **Linux**: użyj **Monitor of Output** (PulseAudio).
+- **macOS**: zainstaluj **Soundflower** lub **BlackHole**.
 
 ---
 
-### 🔹 **3. Instalacja Pythona i wymaganych bibliotek**
+## 🚀 **Jak uruchomić Fairy Reader na Windows, Linux i macOS**
 
-1. **Zainstaluj Pythona** 🐍   👉 [Pobierz Python](https://www.python.org/)
-2. **Zainstaluj wymagane biblioteki**   Otwórz terminal (cmd / PowerShell) i wpisz:
-   ```sh
-   pip install sounddevice numpy keyboard
-   ```
-3. **Aktywuj Stereo Mix**
-   - **Kliknij prawym** na ikonę dźwięku w Windows.
-   - **Dźwięki → Zakładka "Nagrywanie"**.
-   - **Pokaż wyłączone urządzenia** i włącz **Stereo Mix**.
+### ✅ Windows 10/11
 
----
-
-### 🔹 **4. Uruchomienie skryptu**
-
-Po przygotowaniu książek i ustawieniu lektora:
-
-1. Otwórz dwa okna **Calibre** z książką w języku obcym i tłumaczeniem.
-2. Ustaw ich **automatyczne czytanie**.
-3. **Spauzuj lektora** w obu oknach.
-4. **Uruchom skrypt**:
+1. Włącz **Stereo Mix** lub **VB-Audio Virtual Cable**.
+2. Ustaw **CABLE Input** jako domyślne urządzenie odtwarzające.
+3. (Opcjonalnie) Włącz "Nasłuchuj tego urządzenia".
+4. Uruchom:
    ```sh
    python fairy_reader.py
    ```
-5. **Sterowanie skryptem**:
-   - 🔵 **F9** – Rozpocznij/zatrzymaj nasłuchiwanie.
-   - 🔴 **ESC** – Zamknij program.
+
+### ✅ Linux (Ubuntu i inne)
+
+1. Korzystaj z **PulseAudio**.
+2. Skrypt znajdzie "Monitor of Output".
+3. Uruchom:
+   ```sh
+   python3 fairy_reader.py
+   ```
+
+### ✅ macOS
+
+1. Zainstaluj **Soundflower** lub **BlackHole**.
+2. Przekieruj dźwięk przez wirtualny kabel.
+3. Uruchom:
+   ```sh
+   python3 fairy_reader.py
+   ```
 
 ---
 
-## 🎥 **Linki do YouTube**
+## 🔊 Skróty klawiszowe
 
-📽 **Prezentacja działania Fairy Reader**📽 **Instrukcja konfiguracji i instalacji**
+- 🔵 **F9** — Start/Stop nasłuchu
+- 🔴 **ESC** — Wyjście z programu
 
-*(Podaj tutaj linki do filmów, jeśli są dostępne)*
+---
+
+## 📺 Linki do YouTube
+
+- **Prezentacja działania Fairy Reader**
+- **Instrukcja konfiguracji i instalacji**
+
+*(Wstaw linki tutaj)*
 
 ---
 
-## 📌 **Podsumowanie**
+## 📌 Podsumowanie
 
-Fairy Reader to **nowatorskie narzędzie** do nauki języków poprzez czytanie i słuchanie audiobooków. Dzięki automatycznemu przełączaniu między książką w języku obcym a jej tłumaczeniem, metoda ta pozwala na szybkie i przyjemne przyswajanie nowego słownictwa. 🚀
+Fairy Reader to **nowatorskie narzędzie** do nauki języków poprzez czytanie i słuchanie audiobooków z automatycznym przełączaniem treści. 🚀
 
-🔹 **Brak gramatyki** – naturalne przyswajanie języka.🔹 **Szybsza nauka** – realne teksty i kontekst.🔹 **Pełna automatyzacja** – skrypt zarządza przełączaniem.
-
----
+- Brak wkuwania gramatyki.
+- Naturalne przyswajanie języka.
+- Pełna automatyzacja!
